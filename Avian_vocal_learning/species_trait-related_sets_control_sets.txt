@@ -10,7 +10,7 @@ FALPE,CARCR,TYTAL,HALLE,HALAL,CATAU
 # Set of waterbirds (n=15)
 PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE,CHAVO,BALRE,PHORU,PODCR,ANAPL
 
-# 59 core control sets (each n = 6) excluding 2 sets of 2 convergent traits (birds of prey and waterbirds)
+# 59 core control sets (each n = 6): 6 species from 2 vocal learning clades and 1 vocal non-learning clade. These 59 sets do not include 2 core control sets of 2 convergent traits (birds of prey and waterbirds). Core control sets consist of 59 core control sets, set of birds of prey, and set of waterbirds.
 CALAN,CHLUN,CUCCA,MELUN,NESNO,TAUER
 ANAPL,CALAN,GALGA,MELGA,MELUN,NESNO
 CALAN,COLLI,MELUN,MESUN,NESNO,PTEGU
@@ -71,7 +71,7 @@ CALAN,CORBR,EGRGA,GEOFO,PELCR,TAEGU
 CALAN,CORBR,EURHE,GEOFO,PHALE,TAEGU
 APTFO,CALAN,CORBR,GEOFO,PYGAD,TAEGU
 
-# 1,000 random control sets (each n = 6)
+# 1,000 random control sets (each n = 6): 6 randomly selected target species from 3 independent lineages without considering any traits
 APTFO,CHLUN,FULGL,PYGAD,STRCA,TAUER
 APTFO,COLLI,COLST,MESUN,PTEGU,PYGAD
 CHLUN,CUCCA,EGRGA,HALAL,HALLE,TAUER
