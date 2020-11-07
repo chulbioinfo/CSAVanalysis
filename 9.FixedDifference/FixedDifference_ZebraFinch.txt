@@ -1,0 +1,1 @@
+Chromosome	Chromosomal_Position	SNP	Reference_Allele	Alternative_Allele	MSA_Position(Nuc)	MSA_Position(AA)	VCF_Annotation

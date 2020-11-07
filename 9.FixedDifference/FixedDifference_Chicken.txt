@@ -1,0 +1,2 @@
+Chromosome	Chromosomal_Position	SNP	Reference_Allele	Alternative_Allele	MSA_Position(Nuc)	MSA_Position(AA)	VCF_Annotation
+14	8767046	rs317620770	A	G	2524	842	OTOA_missense_variant;

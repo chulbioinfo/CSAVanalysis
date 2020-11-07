@@ -1,0 +1,1 @@
+./prank/bin/prank -d=./input/5061_DRD5.fa -o=./output/5061_DRD5 -codon -F > ./report/5061_DRD5.txt
