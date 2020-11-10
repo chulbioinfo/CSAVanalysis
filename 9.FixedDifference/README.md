@@ -7,6 +7,7 @@ The script to run 'fixed difference' analysis compares the position of CSAV in t
 The script was previously run with linux (Ubuntu 18.04.3) server with RAM: +100GB and CPU: 24 cores. However, the code does not require much resource. <1GB and 1 core would suffice to run the code. The script is based on python (3.7.3) and hence python (preferrably >3.7.3) needs to be installed prior to running this script. This could be done by:
 
 sudo apt-get update
+
 sudo apt-get install python3.8
 
 ## Running the script ##
@@ -21,7 +22,9 @@ To run this script, the input files needed include:
 
 Once you have all of these input files, the script can be simply run by:
 
+
 python Check_FixedDifference.py
+
 
 This will generate output files:
 
