@@ -13,15 +13,15 @@ This script is supported for *Windows OS* and *Linux*. The script has been teste
 
 ## Python Dependencies
 This script mainly depends on the Python scientific stack.
-'''
-numpy
-scipy
-'''
+
+  numpy
+  scipy
+
 
 # Running the script
-'''
-python CSAV.py
-'''
+
+  python CSAV.py
+
 
 # License
 This project is covered under the Apache 2.0 License.
