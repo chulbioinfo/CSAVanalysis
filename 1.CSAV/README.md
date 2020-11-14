@@ -55,15 +55,15 @@ python CSAV.py
 </code>
 </pre>
 
-* This sciprt requires following information:
-    1.input path
-    2.input file format
-    3.whole species list 
-    4.target species list
-    5.outgroup species list
-    6.output path
+  - This sciprt requires following information:
+  1. input path
+  2. input file format
+  3. whole species list 
+  4. target species list
+  5. outgroup species list
+  6. output path
 
-+ Example variables in the script
+  - Example variables in the script
 <pre>
 <code>
     seqPATH = "../../0.rawdata/MSA/pep/"
