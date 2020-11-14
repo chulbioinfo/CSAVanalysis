@@ -1,5 +1,7 @@
 # Overview
-This script to run 'CSAV' analysis compares the position of CSAV in the multiple sequence alignment (MSA) file with the known SNPs in the chromosomal position. The script first converts the CSAV position in the MSA file to chromosomal position based on the BLAST output file and the chromosomal positions of CSAVs are then compared with population variant dataset (vcf file downloaded from Ensembl) to check if CSAV is conserved within the population data. The script here is unable to run on different dataset.
+This script to run 'CSAV' analysis to idenify convergent single amino acid variants of target species which share a convergent trait you are interested in.
+
+compares the position of CSAV in the multiple sequence alignment (MSA) file with the known SNPs in the chromosomal position. The script first converts the CSAV position in the MSA file to chromosomal position based on the BLAST output file and the chromosomal positions of CSAVs are then compared with population variant dataset (vcf file downloaded from Ensembl) to check if CSAV is conserved within the population data. The script here is unable to run on different dataset.
 
 # System Requirments
 ## Hardware requirements
@@ -50,6 +52,26 @@ cd ../../
 <code>
 cd 1.CSAV/bin/
 python CSAV.py
+</code>
+</pre>
+
+* This sciprt requires following information:
+    1.input path
+    2.input file format
+    3.whole species list 
+    4.target species list
+    5.outgroup species list
+    6.output path
+
++ Example variables in the script
+<pre>
+<code>
+    seqPATH = "../../0.rawdata/MSA/pep/"
+    seqFORM = ".sate.default.pep.removed.shortname.fasta"
+    sID_LIST = ['TAEGU','GEOFO','CORBR','MELUN','NESNO','CALAN','MANVI','FALPE','CARCR','MERNU','PICPU','BUCRH','APAVI','LEPDI','COLST','TYTAL','HALLE','HALAL','CATAU','PELCR','EGRGA','NIPNI','PHACA','FULGL','PYGAD','APTFO','GAVST','PHALE','EURHE','CHAVO','BALRE','OPHHO','CHAPE','CAPCA','CHLUN','TAUER','CUCCA','MESUN','PTEGU','COLLI','PHORU','PODCR','GALGA','MELGA','ANAPL','TINMA','STRCA','HUMAN','ACACH']
+    nTargets = 'TAEGU,GEOFO,CORBR,MELUN,NESNO,CALAN'
+    outgroup_LIST = ['HUMAN','ACACH']
+    oPATH = "../output/"
 </code>
 </pre>
 
