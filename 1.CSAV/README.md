@@ -1,7 +1,6 @@
 # Overview
 This script to run 'CSAV' analysis to idenify convergent single amino acid variants of target species which share a convergent trait you are interested in.
-
-compares the position of CSAV in the multiple sequence alignment (MSA) file with the known SNPs in the chromosomal position. The script first converts the CSAV position in the MSA file to chromosomal position based on the BLAST output file and the chromosomal positions of CSAVs are then compared with population variant dataset (vcf file downloaded from Ensembl) to check if CSAV is conserved within the population data. The script here is unable to run on different dataset.
+- - -
 
 # System Requirments
 ## Hardware requirements
@@ -19,6 +18,7 @@ This script mainly depends on the Python scientific stack.
     numpy
     scipy
 
+- - -
 
 # Running the script
 * (option1) If you want to clone the github link:
@@ -75,6 +75,9 @@ python CSAV.py
     oPATH = "../output/"
 </code>
 </pre>
+
+
+- - -
 
 # License
 This project is covered under the Apache 2.0 License.
