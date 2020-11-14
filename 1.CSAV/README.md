@@ -55,6 +55,7 @@ python CSAV.py
 </code>
 </pre>
 
+(Optional to check before running the script)
   - This sciprt requires following information:
   1. input path
   2. input file format
