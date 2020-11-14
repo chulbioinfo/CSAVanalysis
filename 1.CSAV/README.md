@@ -55,8 +55,8 @@ python CSAV.py
 </code>
 </pre>
 
-(Optional to check before running the script)
-  - This sciprt requires following information:
+(Optional step to check inputs before running the script)
+  - This sciprt requires following variables:
   1. input path
   2. input file format
   3. whole species list 
