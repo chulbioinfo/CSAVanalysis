@@ -36,8 +36,7 @@ cd CSAVanalysis-master/
 </code>
 </pre>
 
-* Decompress the demo data (as [fasta][fastalink] format)
-[fastalink]: https://en.wikipedia.org/wiki/FASTA_format "go to fasta"
+* Decompress the demo data (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format)
 <pre>
 <code>
 cd 0.rawdata/MSA/
