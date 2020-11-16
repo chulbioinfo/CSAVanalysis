@@ -1,10 +1,16 @@
 # Overview
-This script to run 'CSAV' analysis to idenify convergent single amino acid variants of target species which share a convergent trait you are interested in.
+This script to run 'CSAV' analysis to idenify convergent single amino acid variants (CSAVs) of target species which share a convergent trait you are interested in. Based on this script and demo data, you can find CSAVs of avian vocal learners mutually exclusive to amino acids of vocal non-learners. It needs multiple peptide sequence aglinments as input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format). As variables in the script, following informations are necessary:
+  1. input path
+  2. input file format
+  3. whole species list 
+  4. target species list # avian vocal learners 
+  5. outgroup species list # Rifleman with the uncertainty for vocal learning ability
+  6. output path
 - - -
 
 # System Requirments
 ## Hardware requirements
-This script requires only a standard computer with enough RAM to support the in-memory operations.
+This script requires only a standard computer with enough RAM to support the in-memory operations. It was developed and tested in a standard computer (AMD Ryzen 5 2400G 3.6GHz and 16GB RAM)
 
 ## Software requirements
 ### OS Requirements
@@ -18,6 +24,8 @@ This script mainly depends on the Python scientific stack.
     numpy
     scipy
 
+## Running time with the demo data
+* 4 min 52.236422 sec
 - - -
 
 # Running the script
@@ -79,9 +87,7 @@ python CSAV.py
 
 - - -
 
-# Running time
-- Based on the demo data (Mutiple peptide sequence alignments of 141 genes with convergent single amino acid variants of vocal learning birds)
-- 4 min 52.236422 sec (single thread in a standard computer with AMD Ryzen 5 2400G 3.6GHz and 16GB RAM)
+
 
 # License
 This project is covered under the Apache 2.0 License.
