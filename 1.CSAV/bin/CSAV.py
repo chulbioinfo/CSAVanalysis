@@ -1,23 +1,55 @@
 # CSAV program
-# Version 1.0 (6.Nov.2020)
+# Version 1.0 (14.Nov.2020)
 # written by Chul Lee (e-mail: chul.bioinfo@gmail.com)
+# This code was developed and conducted in Python 3.7.1 (v3.7.1:260ec2c36a, Oct 20 2018, 14:57:15) [MSC v.1915 64 bit (AMD64)]
+# OS for development and analysis: Windows 10 Education
 
+# Libraries
 import scipy.stats as stats
 from datetime import datetime
-import os, glob, sys, math, time
+import os
+import glob
+import sys
+import math
+import time
+
+
+# Global variable
+## input
+seqPATH = "../../0.rawdata/MSA/pep/"
+seqFORM = ".sate.default.pep.removed.shortname.fasta"
+### list of species that is analyzed in this code: If species is not included in this list, it would not be included as the other species
+sID_LIST = ['TAEGU','GEOFO','CORBR','MELUN','NESNO','CALAN','MANVI','FALPE','CARCR','MERNU','PICPU','BUCRH','APAVI','LEPDI','COLST','TYTAL','HALLE','HALAL','CATAU','PELCR','EGRGA','NIPNI','PHACA','FULGL','PYGAD','APTFO','GAVST','PHALE','EURHE','CHAVO','BALRE','OPHHO','CHAPE','CAPCA','CHLUN','TAUER','CUCCA','MESUN','PTEGU','COLLI','PHORU','PODCR','GALGA','MELGA','ANAPL','TINMA','STRCA','HUMAN','ACACH']
+### list of target species with a convergent trait 
+nTargets = 'TAEGU,GEOFO,CORBR,MELUN,NESNO,CALAN'
+### list of outgroup species excluded in the other species but recorded with amino acid of the outgroup species
+outgroup_LIST = ['HUMAN','ACACH']
+## output PATH
+oPATH   = "../output/"
+## making directory of output PATH
+#os.system("mkdir "+oPATH)
+
+# Automated variables
+targetID_LIST = nTargets.split(',')
+
+othersID_LIST  = []
+for sID in sID_LIST:
+ if not sID in targetID_LIST:
+  if not sID in outgroup_LIST:
+   othersID_LIST.append(sID)
+sID_LIST = []
+sID_LIST = targetID_LIST + othersID_LIST + outgroup_LIST
+
+tmpTargets = nTargets.replace(',','_')
+
+CNT_target    = len(targetID_LIST)
+CNT_others    = len(othersID_LIST)
+
+## setting start time
 startTime = datetime.today()
 print("Start time")
 print(startTime)
-################################ Global variable ############################
-try:
-    nTargets = sys.argv[1]
-except: # default targets = six avian vocal learners in 47 birds
-    nTargets = 'TAEGU,GEOFO,CORBR,MELUN,NESNO,CALAN'
-    #nTargets = 'FALPE,CARCR,TYTAL,HALLE,HALAL,CATAU' # birds of prey
-    #nTargets = 'PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE,CHAVO,BALRE,PHORU,PODCR,ANAPL' # waterbirds
 
-
-## setting date
 nYear   = str(datetime.today().year)
 nMonth  = str(datetime.today().month)
 nDay    = str(datetime.today().day)
@@ -33,35 +65,13 @@ if len(nMin)==1:
     nMin = "0" + nMin
 nDate   = nYear + nMonth + nDay + "_" + nHour + nMin
 
-
-# Variables in this study
-sID_LIST = ['TAEGU','GEOFO','CORBR','MELUN','NESNO','CALAN','MANVI','FALPE','CARCR','MERNU','PICPU','BUCRH','APAVI','LEPDI','COLST','TYTAL','HALLE','HALAL','CATAU','PELCR','EGRGA','NIPNI','PHACA','FULGL','PYGAD','APTFO','GAVST','PHALE','EURHE','CHAVO','BALRE','OPHHO','CHAPE','CAPCA','CHLUN','TAUER','CUCCA','MESUN','PTEGU','COLLI','PHORU','PODCR','GALGA','MELGA','ANAPL','TINMA','STRCA','HUMAN','ACACH']
-outgroup_LIST = ['HUMAN','ACACH']
-
-
-seqPATH = "../../0.rawdata/MSA/pep/"
-seqFORM = ".sate.default.pep.removed.shortname.fasta"
-tmpTargets = nTargets.replace(',','_')
-oPATH   = "../output/"
-os.system("mkdir "+oPATH)
-targetID_LIST = nTargets.split(',')
-fNAME_SUMMARY = "0." + nTargets + "_CSAV_" + nDate + ".txt"
-
-othersID_LIST  = []
-for sID in sID_LIST:
- if not sID in targetID_LIST:
-  if not sID in outgroup_LIST:
-   othersID_LIST.append(sID)
-sID_LIST = []
-sID_LIST = targetID_LIST + othersID_LIST + outgroup_LIST
-
-CNT_target    = len(targetID_LIST)
-CNT_others    = len(othersID_LIST)
-
+## Amino acids: must not include '.' in the sequences, because '.' is used as a marker of loss of gene
 AA_SET        = ["A","R","N","D","C","E","Q","G","H","I","L","K","M","F","P","S","T","W","Y","V","U","O","-",'*',"X"] 
 
-### must not include '.' in the sequences, because '.' is used as a marker of loss of gene
+## output NAME
+fNAME_SUMMARY = "CSAV_output_" + nTargets + "_" + nDate + ".txt"
 
+# writing output
 FPOUT_SUMMARY = open(oPATH + fNAME_SUMMARY,'w')
 tmpline = "Gene" + '\t' + "Position" + '\t' + "CSAV_Type" + '\t' + "TargetAA" + '\t' + "OthersAA" + '\t' + "Pvalue" + '\t' + "Adj.pvalue" + '\t' + "Total_Entropy" + '\t' + "Target_Entropy" + '\t' + "Others_Entropy" + "\t"+ "\t".join(sID_LIST)+'\n'
 FPOUT_SUMMARY.write(tmpline)
@@ -270,5 +280,5 @@ FPOUT_SUMMARY.close()
 endTime = datetime.today()
 print("Running time")
 print(endTime - startTime)
-print(".........................................Finish TAAS analysis")
+print(".........................................Finish CSAV analysis")
 
