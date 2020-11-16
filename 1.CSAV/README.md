@@ -6,6 +6,7 @@ This script to run 'CSAV' analysis to idenify convergent single amino acid varia
   4. target species list # avian vocal learners 
   5. outgroup species list # Rifleman with the uncertainty for vocal learning ability
   6. output path
+It generates a output with a summary of CSAV analysis and the full amino acids of whole species list at identified CSAV sites.
 - - -
 
 # System Requirments
