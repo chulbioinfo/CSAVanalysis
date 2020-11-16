@@ -1,12 +1,14 @@
 # Overview
-This script to run 'CSAV' analysis to idenify convergent single amino acid variants (CSAVs) of target species which share a convergent trait you are interested in. Based on this script and demo data, you can find CSAVs of avian vocal learners mutually exclusive to amino acids of vocal non-learners. It needs multiple peptide sequence aglinments as input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format). As variables in the script, following informations are necessary:
+This script to run 'CSAV' analysis to idenify convergent single amino acid variants (CSAVs) of target species which share a convergent trait you are interested in. Based on this script and demo data, you can find CSAVs of avian vocal learners mutually exclusive to amino acids of vocal non-learners. 
+## input
+It needs multiple peptide sequence aglinments as input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format). As variables in the script, following informations are necessary:
   1. input path
   2. input file format
   3. whole species list 
   4. target species list # avian vocal learners 
   5. outgroup species list # Rifleman with the uncertainty for vocal learning ability
   6. output path
-
+## output
 It generates a text file (.txt) as a output with a summary of CSAV analysis and the full amino acids of whole species list at identified CSAV sites.
 - - -
 
