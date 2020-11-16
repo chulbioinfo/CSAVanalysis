@@ -173,7 +173,7 @@ Fig_1e <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
          text.col = c("red","grey","black")
   )
 }
-par(mfrow=c(1,1),mar = c(2, 2, 2, 2))
+#par(mfrow=c(1,1),mar = c(2, 2, 2, 2))
 
 pdf("./Fig1e_iCSAV_POB_randomctrl_v20201011.pdf",width=6,height=6)
 layout(mat = matrix(c(1),1,1,byrow=T))
@@ -295,7 +295,7 @@ Fig_1f <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
          text.col = c("red","orange","purple","blue","grey","black")
   )
 }
-par(mfrow=c(1,1),mar = c(2, 2, 2, 2))
+#par(mfrow=c(1,1),mar = c(2, 2, 2, 2))
 
 pdf("./Fig1f_iCSAV_dCSAV_corectrl_v20201011.pdf",width=6,height=6)
 layout(mat = matrix(c(1),1,1,byrow=T))

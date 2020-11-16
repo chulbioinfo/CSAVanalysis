@@ -1,3 +1,7 @@
+# Please set workding direcotry into "6.CorrelationPlots" in zipfile
+setwd("E:\\GoogleDrive\\Research\\2020\\Avian_vocal_learning_20201020\\Final_Draft\\GitHub\\VocalLearningBirds_2020\\Vocallearningbirds_2020\\6.CorrelationPlots\\")
+
+
 # Library
 #install.packages("ggplot2")
 library(ggplot2)
@@ -14,8 +18,7 @@ library("pheatmap")
 
 # Fig4ab
 # input data
-setwd("E:\\GoogleDrive\\Research\\2020\\Avian_vocal_learning_20201011\\Analysis\\Outlier\\1000ctrl\\")
-data <- read.table("0.summary_Phy_TAAS_20190321.marked_targets.info",sep='\t',header = T)
+data <- read.table("1000ctrl/0.summary_Phy_CSAV_20190321.marked_targets.info",sep='\t',header = T)
 attach(data)
 tmp_phylo_info = cbind.data.frame(ProOriBL,ProTerBL,DistanceTN,DistanceTB)
 colnames(tmp_phylo_info)<-c("POB","PTB","DTN","DTB")
@@ -23,13 +26,13 @@ tmp_data_TAAS = cbind.data.frame(TV_C, TV_D, TV_A)
 colnames(tmp_data_TAAS)<-c("iCSAV","dCSAV","CSAV")
 detach(data)
 
-data <- read.table("0.summary_Phy_TCC_20190321.marked_targets.info",sep='\t',header = T)
+data <- read.table("1000ctrl/0.summary_Phy_CSCV_20190321.marked_targets.info",sep='\t',header = T)
 attach(data)
 tmp_data_TCC= cbind.data.frame(TV_C,TV_D,TV_A)
 colnames(tmp_data_TCC)<-c("iCSCV","dCSCV","CSCV")
 detach(data)
 
-data <- read.table("0.summary_Phy_TSNV_20190321.marked_targets.info",sep='\t',header = T)
+data <- read.table("1000ctrl/0.summary_Phy_CSNV_20190321.marked_targets.info",sep='\t',header = T)
 attach(data)
 tmp_data_TSNV= cbind.data.frame(TV_C,TV_D,TV_A)
 colnames(tmp_data_TSNV)<-c("iCSNV","dCSNV","CSNV")
@@ -184,7 +187,7 @@ colnames(data_matrix)<-colnames(tmp_data)
 rownames(data_matrix)<-colnames(tmp_data)
 
 data_matrix
-write.csv(data_matrix, file = "Table.S3a.csv")
+write.csv(data_matrix, file = "FigS6a.csv")
 
 
 
@@ -212,59 +215,13 @@ colnames(data_matrix)<-colnames(tmp_data)
 rownames(data_matrix)<-colnames(tmp_data)
 
 data_matrix
-write.csv(data_matrix, file = "Table.S4a.csv")
+write.csv(data_matrix, file = "FigS6c.csv")
 
 
 
 
-pdf("Fig4_1000randomctrl_P_heatmap_v20201022.pdf",width=6,height=6)
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
-for(i in 1:length(colnames(tmp_data))){
-  data_list = list()
-  for(j in 1:length(colnames(tmp_data))){
-    if(i==j){
-      tmp_p = NA
-    }else{
-      dep_ind_var.lm = lm(tmp_data[,j] ~ tmp_data[,i])
-      lm.sum = summary(dep_ind_var.lm)
-      tmp_p = lm.sum$coefficients[2,4]
-    }
-    data_matrix[i,j] <- tmp_p
-  }
-}
-colnames(data_matrix)<-colnames(tmp_data)
-rownames(data_matrix)<-colnames(tmp_data)
-data_matrix
-pheatmap(data_matrix, cutree_rows = 2, cutree_cols = 2)
-dev.off()
 
-
-pdf("Fig4_1000randomctrl_R_heatmap_v20201022.pdf",width=6,height=6)
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
-for(i in 1:length(colnames(tmp_data))){
-  data_list = list()
-  for(j in 1:length(colnames(tmp_data))){
-    if(i==j){
-      tmp_r2 = NA
-    }else{
-      dep_ind_var.lm = lm(tmp_data[,j] ~ tmp_data[,i])
-      lm.sum = summary(dep_ind_var.lm)
-      tmp_r2 = lm.sum$adj.r.squared
-    }
-    data_matrix[i,j] <- tmp_r2
-  }
-}
-colnames(data_matrix)<-colnames(tmp_data)
-rownames(data_matrix)<-colnames(tmp_data)
-data_matrix
-pheatmap(data_matrix, cutree_rows = 2, cutree_cols = 2)
-#heatmap.2(data_matrix, scale = "none", col = bluered(100), 
-#          trace = "none", density.info = "none")
-dev.off()
-
-
-
-pdf("Fig4_1000randomctrl_v20201022.pdf",width=16,height=16)
+pdf("./Fig4_1000randomctrl_v20201022.pdf",width=16,height=16)
 par(mfrow=c(length(colnames(tmp_data)),length(colnames(tmp_data))), mar = c(2.2, 2.2, 0, 0))
 attach(tmp_data)
 for(i in 1:length(colnames(tmp_data))){
@@ -302,54 +259,14 @@ for(i in 1:length(colnames(tmp_data))){
 dev.off()
 
 
-pdf("Fig4_1000randomctrl_woAxis_v2020122.pdf",width=16,height=16)
-par(mfrow=c(length(colnames(tmp_data)),length(colnames(tmp_data))), mar = c(0, 0, 0, 0))
-attach(tmp_data)
-for(i in 1:length(colnames(tmp_data))){
-  for(j in 1:length(colnames(tmp_data))){
-    if(i==j){
-      #par(oma=c(0,0,0,0))
-      hist(tmp_data[,i],breaks=24,col="darkgrey", border="darkgrey",  main="",xlab = "", ylab = "", axes = FALSE, plot = TRUE)
-      legend("topleft",legend = colnames(tmp_data)[i],bty='n',text.col ="blue",cex=1.5)
-    }else{
-      if(i<j){
-        #par(oma=c(0,0,0,0))
-        R_plot(tmp_data[,j],tmp_data[,i],"","","",tmp_data)
-      }else{
-        if(j==1){
-          if(i==length(colnames(tmp_data))){
-            #par(oma=c(2,2,0,0))
-            correlation_plot_with_XYax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
-          }else{
-            #par(oma=c(0,2,0,0))
-            correlation_plot_with_Yax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
-          }
-        }else{
-          if(i==length(colnames(tmp_data))){
-            #par(oma=c(2,0,0,0))
-            correlation_plot_with_Xax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
-          }else{
-            #par(oma=c(0,0,0,0))
-            correlation_plot(tmp_data[,i],tmp_data[,j],"","","",tmp_data)  
-          }
-        }
-      }
-    }
-  }
-}
-dev.off()
 
 
-
-rownames(tmp_data)[1]
-colnames(tmp_data)[1]
 
 
 # Fig4cd
 # input data
-setwd("E:\\GoogleDrive\\Research\\2020\\Avian_vocal_learning_20201011\\Analysis\\Outlier\\61ctrl\\")
 
-data <- read.table("0.summary_Phy_TAAS_20201011.txt",sep='\t',header = T)
+data <- read.table("61ctrl/0.summary_Phy_CSAV_20201011.txt",sep='\t',header = T)
 attach(data)
 tmp_phylo_info = cbind.data.frame(ProOriBL,ProTerBL,DistanceTN,DistanceTB)
 colnames(tmp_phylo_info)<-c("POB","PTB","DTN","DTB")
@@ -357,13 +274,13 @@ tmp_data_TAAS = cbind.data.frame(TV_C, TV_D, TV_A)
 colnames(tmp_data_TAAS)<-c("iCSAV","dCSAV","CSAV")
 detach(data)
 
-data <- read.table("0.summary_Phy_TCC_20201011.txt",sep='\t',header = T)
+data <- read.table("61ctrl/0.summary_Phy_CSCV_20201011.txt",sep='\t',header = T)
 attach(data)
 tmp_data_TCC= cbind.data.frame(TV_C,TV_D,TV_A)
 colnames(tmp_data_TCC)<-c("iCSCV","dCSCV","CSCV")
 detach(data)
 
-data <- read.table("0.summary_Phy_TSNV_20201011.txt",sep='\t',header = T)
+data <- read.table("61ctrl/0.summary_Phy_CSNV_20201011.txt",sep='\t',header = T)
 attach(data)
 tmp_data_TSNV= cbind.data.frame(TV_C,TV_D,TV_A)
 colnames(tmp_data_TSNV)<-c("iCSNV","dCSNV","CSNV")
@@ -411,7 +328,7 @@ colnames(data_matrix)<-colnames(tmp_data)
 rownames(data_matrix)<-colnames(tmp_data)
 
 data_matrix
-write.csv(data_matrix, file = "Table.S3b.csv")
+write.csv(data_matrix, file = "FigS6b.csv")
 
 
 
@@ -439,79 +356,10 @@ colnames(data_matrix)<-colnames(tmp_data)
 rownames(data_matrix)<-colnames(tmp_data)
 
 data_matrix
-write.csv(data_matrix, file = "Table.S4b.csv")
+write.csv(data_matrix, file = "FigS6d.csv")
 
 
-
-pdf("Fig4_61corectrl_R_heatmap_v20201022.pdf",width=6,height=6)
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
-for(i in 1:length(colnames(tmp_data))){
-  data_list = list()
-  for(j in 1:length(colnames(tmp_data))){
-    if(i==j){
-      tmp_r2 = NA
-    }else{
-      dep_ind_var.lm = lm(tmp_data[,j] ~ tmp_data[,i])
-      lm.sum = summary(dep_ind_var.lm)
-      tmp_r2 = lm.sum$adj.r.squared
-    }
-    data_matrix[i,j] <- tmp_r2
-  }
-}
-colnames(data_matrix)<-colnames(tmp_data)
-rownames(data_matrix)<-colnames(tmp_data)
-data_matrix
-
-#heatmap.2(data_matrix, scale = "none", col = bluered(100), 
-#          trace = "none", density.info = "none")
-pheatmap(data_matrix, cutree_rows = 2, cutree_cols = 2)
-dev.off()
-
-pdf("Fig4_61corectrl_P_heatmap_v20201022.pdf",width=6,height=6)
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
-for(i in 1:length(colnames(tmp_data))){
-  data_list = list()
-  for(j in 1:length(colnames(tmp_data))){
-    if(i==j){
-      tmp_p = NA
-    }else{
-      dep_ind_var.lm = lm(tmp_data[,j] ~ tmp_data[,i])
-      lm.sum = summary(dep_ind_var.lm)
-      tmp_p = lm.sum$coefficients[2,4]
-    }
-    data_matrix[i,j] <- -tmp_p
-  }
-}
-colnames(data_matrix)<-colnames(tmp_data)
-rownames(data_matrix)<-colnames(tmp_data)
-data_matrix
-pheatmap(data_matrix, cutree_rows = 2, cutree_cols = 2)
-dev.off()
-
-
-pdf("Fig4_61corectrl_log10P_heatmap_v20201022.pdf",width=6,height=6)
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
-for(i in 1:length(colnames(tmp_data))){
-  data_list = list()
-  for(j in 1:length(colnames(tmp_data))){
-    if(i==j){
-      tmp_p = NA
-    }else{
-      dep_ind_var.lm = lm(tmp_data[,j] ~ tmp_data[,i])
-      lm.sum = summary(dep_ind_var.lm)
-      tmp_p = lm.sum$coefficients[2,4]
-    }
-    data_matrix[i,j] <- -log10(tmp_p)
-  }
-}
-colnames(data_matrix)<-colnames(tmp_data)
-rownames(data_matrix)<-colnames(tmp_data)
-data_matrix
-pheatmap(data_matrix, cutree_rows = 2, cutree_cols = 2)
-dev.off()
-
-
-pdf("FigS4_61corectrl_v20201022.pdf",width=16,height=16)
+pdf("./FigS5_61corectrl_v20201022.pdf",width=16,height=16)
 par(mfrow=c(length(colnames(tmp_data)),length(colnames(tmp_data))), mar = c(2.2, 2.2, 0, 0))
 attach(tmp_data)
 for(i in 1:length(colnames(tmp_data))){
@@ -548,40 +396,3 @@ for(i in 1:length(colnames(tmp_data))){
 }
 dev.off()
 
-
-pdf("FigS4_61corectrl_woAxis_v20201022.pdf",width=16,height=16)
-par(mfrow=c(length(colnames(tmp_data)),length(colnames(tmp_data))), mar = c(0, 0, 0, 0))
-attach(tmp_data)
-for(i in 1:length(colnames(tmp_data))){
-  for(j in 1:length(colnames(tmp_data))){
-    if(i==j){
-      #par(oma=c(0,0,0,0))
-      hist(tmp_data[,i],breaks=24,col="darkgrey", border="darkgrey", main="",xlab = "", ylab = "", axes = FALSE, plot = TRUE)
-      legend("topleft",legend = colnames(tmp_data)[i],bty='n',text.col ="blue",cex=1.5)
-    }else{
-      if(i<j){
-        #par(oma=c(0,0,0,0))
-        R_plot(tmp_data[,j],tmp_data[,i],"","","",tmp_data)
-      }else{
-        if(j==1){
-          if(i==length(colnames(tmp_data))){
-            #par(oma=c(2,2,0,0))
-            correlation_plot_with_XYax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
-          }else{
-            #par(oma=c(0,2,0,0))
-            correlation_plot_with_Yax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
-          }
-        }else{
-          if(i==length(colnames(tmp_data))){
-            #par(oma=c(2,0,0,0))
-            correlation_plot_with_Xax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
-          }else{
-            #par(oma=c(0,0,0,0))
-            correlation_plot(tmp_data[,i],tmp_data[,j],"","","",tmp_data)  
-          }
-        }
-      }
-    }
-  }
-}
-dev.off()
