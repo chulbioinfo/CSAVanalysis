@@ -30,7 +30,7 @@ This script mainly depends on the Python scientific stack.
     scipy
 
 ## Running time with the demo data
-* 4 min 52.236422 sec
+* 2 min 13.064760 sec
 - - -
 
 # Running the script
