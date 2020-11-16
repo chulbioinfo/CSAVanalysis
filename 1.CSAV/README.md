@@ -79,6 +79,10 @@ python CSAV.py
 
 - - -
 
+# Running time
+- Based on the demo data (Mutiple peptide sequence alignments of 141 genes with convergent single amino acid variants of vocal learning birds)
+- 4 min 52.236422 sec (single thread in a standard computer with AMD Ryzen 5 2400G 3.6GHz and 16GB RAM)
+
 # License
 This project is covered under the Apache 2.0 License.
 
