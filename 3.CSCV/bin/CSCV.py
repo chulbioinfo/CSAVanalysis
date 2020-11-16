@@ -1,6 +1,73 @@
-# CSCV program
-# demo version 1.0 (6.Nov.2020)
+# CSCV program to detect convergent single codon variants
+# Version 1.0 (14.Nov.2020)
 # written by Chul Lee (e-mail: chul.bioinfo@gmail.com)
+# This code was developed and conducted in Python 3.7.1 (v3.7.1:260ec2c36a, Oct 20 2018, 14:57:15) [MSC v.1915 64 bit (AMD64)]
+# OS for development and analysis: Windows 10 Education
+
+# Libraries
+import scipy.stats as stats
+from datetime import datetime
+import os
+import glob
+import sys
+import math
+import time
+
+
+# Global variable
+## input
+seqPATH = "../../0.rawdata/MSA/cds/"
+seqFORM = ".sate.default.pep2cds.removed.shortname.fasta"
+### list of species that is analyzed in this code: If species is not included in this list, it would not be included as the other species
+sID_LIST = ['TAEGU','GEOFO','CORBR','MELUN','NESNO','CALAN','MANVI','FALPE','CARCR','MERNU','PICPU','BUCRH','APAVI','LEPDI','COLST','TYTAL','HALLE','HALAL','CATAU','PELCR','EGRGA','NIPNI','PHACA','FULGL','PYGAD','APTFO','GAVST','PHALE','EURHE','CHAVO','BALRE','OPHHO','CHAPE','CAPCA','CHLUN','TAUER','CUCCA','MESUN','PTEGU','COLLI','PHORU','PODCR','GALGA','MELGA','ANAPL','TINMA','STRCA','HUMAN','ACACH']
+### list of target species with a convergent trait 
+nTargets = 'TAEGU,GEOFO,CORBR,MELUN,NESNO,CALAN'
+### list of outgroup species excluded in the other species but recorded with amino acid of the outgroup species
+outgroup_LIST = ['HUMAN','ACACH']
+## output PATH
+oPATH   = "../output/"
+## making directory of output PATH
+#os.system("mkdir "+oPATH)
+
+# Automated variables
+targetID_LIST = nTargets.split(',')
+
+othersID_LIST  = []
+for sID in sID_LIST:
+ if not sID in targetID_LIST:
+  if not sID in outgroup_LIST:
+   othersID_LIST.append(sID)
+sID_LIST = []
+sID_LIST = targetID_LIST + othersID_LIST + outgroup_LIST
+
+tmpTargets = nTargets.replace(',','_')
+
+CNT_target    = len(targetID_LIST)
+CNT_others    = len(othersID_LIST)
+
+## setting start time
+startTime = datetime.today()
+print("Start time")
+print(startTime)
+
+nYear   = str(datetime.today().year)
+nMonth  = str(datetime.today().month)
+nDay    = str(datetime.today().day)
+nHour   = str(datetime.today().hour)
+nMin    = str(datetime.today().minute)
+if len(nMonth)==1:
+    nMonth = "0" + nMonth
+if len(nDay)==1:
+    nDay = "0" + nDay
+if len(nHour)==1:
+    nHour = "0" + nHour
+if len(nMin)==1:
+    nMin = "0" + nMin
+nDate   = nYear + nMonth + nDay + "_" + nHour + nMin
+
+
+
+
 
 print("CSCV analysis"+'\n'+'\n')
  
@@ -12,12 +79,9 @@ startTime = datetime.today()
 print("Start time")
 print(startTime)
 ################################ Global variable ############################
-try:
-    nTargets = sys.argv[1]
-except: # default targets = six avian vocal learners in 47 birds
-    nTargets = 'TAEGU,GEOFO,CORBR,MELUN,NESNO,CALAN'
-    #nTargets = 'FALPE,CARCR,TYTAL,HALLE,HALAL,CATAU' # birds of prey
-    #nTargets = 'PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE,CHAVO,BALRE,PHORU,PODCR,ANAPL' # waterbirds
+nTargets = 'TAEGU,GEOFO,CORBR,MELUN,NESNO,CALAN'
+#nTargets = 'FALPE,CARCR,TYTAL,HALLE,HALAL,CATAU' # birds of prey
+#nTargets = 'PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE,CHAVO,BALRE,PHORU,PODCR,ANAPL' # waterbirds
 
 ## setting date
 nYear   = str(datetime.today().year)
@@ -35,46 +99,13 @@ if len(nMin)==1:
     nMin = "0" + nMin
 nDate   = nYear + nMonth + nDay + "_" + nHour + nMin
 
-
-### TAAS
-sID_LIST = ['TAEGU','GEOFO','CORBR','MELUN','NESNO','CALAN','MANVI','FALPE','CARCR','MERNU','PICPU','BUCRH','APAVI','LEPDI','COLST','TYTAL','HALLE','HALAL','CATAU','PELCR','EGRGA','NIPNI','PHACA','FULGL','PYGAD','APTFO','GAVST','PHALE','EURHE','CHAVO','BALRE','OPHHO','CHAPE','CAPCA','CHLUN','TAUER','CUCCA','MESUN','PTEGU','COLLI','PHORU','PODCR','GALGA','MELGA','ANAPL','TINMA','STRCA','HUMAN','ACACH']
-outgroup_LIST = ['HUMAN','ACACH']
-
-
-seqPATH = "../../0.rawdata/MSA/cds/"
-#seqPATH = "tmp/test/"
-seqFORM = ".sate.default.pep2cds.removed.shortname.fasta"
-tmpTargets = nTargets.replace(',','_')
-oPATH   = "../output/"#tmpTargets + '_' + nDate+'/'
-os.system("mkdir "+oPATH)
-
-targetID_LIST = nTargets.split(',')
-
-fNAME_SUMMARY = "0." + nTargets + "_codon_TAASresult_" + nDate + ".txt"
-
-
-
-
-################################ Automatic setting ##########################
-
-
-### CSCV
-othersID_LIST  = []
-for sID in sID_LIST:
- if not sID in targetID_LIST:
-  if not sID in outgroup_LIST:
-   othersID_LIST.append(sID)
-sID_LIST = []
-sID_LIST = targetID_LIST + othersID_LIST + outgroup_LIST
-
-CNT_target    = len(targetID_LIST)
-CNT_others    = len(othersID_LIST)
-
+## Amino acids: must not include '.' in the sequences, because '.' is used as a marker of loss of gene
 AA_SET        = ["A","R","N","D","C","E","Q","G","H","I","L","K","M","F","P","S","T","W","Y","V","U","O","-",'*',"X"] 
 CODONTABLE_dic  = {'TTT':'F','TTC':'F','TTA':'L','TTG':'L','CTT':'L','CTC':'L','CTA':'L','CTG':'L','ATT':'I','ATC':'I','ATA':'I','ATG':'M','GTT':'V','GTC':'V','GTA':'V','GTG':'V','TCT':'S','TCC':'S','TCA':'S','TCG':'S','CCT':'P','CCC':'P','CCA':'P','CCG':'P','ACT':'T','ACC':'T','ACA':'T','ACG':'T','GCT':'A','GCC':'A','GCA':'A','GCG':'A','TAT':'Y','TAC':'Y','TAA':'Z','TAG':'Z','CAT':'H','CAC':'H','CAA':'Q','CAG':'Q','AAT':'N','AAC':'N','AAA':'K','AAG':'K','GAT':'D','GAC':'D','GAA':'E','GAG':'E','TGT':'C','TGC':'C','TGA':'Z','TGG':'W','CGT':'R','CGC':'R','CGA':'R','CGG':'R','AGT':'S','AGC':'S','AGA':'R','AGG':'R','GGT':'G','GGC':'G','GGA':'G','GGG':'G',"---":"-",'CTN':'L','GTN':'V','TCN':'S','CCN':'P','ACN':'T','GCN':'A','CGN':'R','GGN':'G'} # Stop codon = 'Z', NNN = 'X'
 
-### must not include '.', because '.' is used as a marker of loss of gene
 
+## output NAME
+fNAME_SUMMARY = "CSCV_output_" + nTargets + "_" + nDate + ".txt"
 FPOUT_SUMMARY = open(oPATH + fNAME_SUMMARY,'w')
 tmpline = "Gene" + '\t' + "Position_Nuc" + '\t' + "CSCV_Type" + '\t' + "TargetCODON" + '\t' + "OthersCODON" + '\t' + "Pvalue_CODON" + '\t' + "Adj.pvalue_CODON" + '\t' + "Total_Entropy_CODON" + '\t' + "Target_Entropy_CODON" + '\t' + "Others_Entropy_CODON" + "\t"+ "\t".join(sID_LIST)+'\t' + "Position_AA" + '\t' + "CSAV" + '\t' + "TargetAA" + '\t' + "OthersAA" + '\t' + "Pvalue_AA" + '\t' + "Adj.pvalue_AA" + '\t' + "Total_Entropy_AA" + '\t' + "Target_Entropy_AA" + '\t' + "Others_Entropy_AA" + "\t"+ "\t".join(sID_LIST)+'\n'
 FPOUT_SUMMARY.write(tmpline)
@@ -432,4 +463,4 @@ FPOUT_SUMMARY.close()
 endTime = datetime.today()
 print("Running time")
 print(endTime - startTime)
-print(".........................................Finish TAAS analysis")
+print(".........................................Finish CSCV analysis")
