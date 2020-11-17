@@ -53,9 +53,9 @@ cd CSAVanalysis-master/
 <pre>
 <code>
 cd 6.CorrelationPlots/
-R Fig1_script_20201107.R
-R Fig2_script_20201107.R
-R Fig3_script_20201107.R
+Rscript Fig1_script_20201107.R
+Rscript Fig2_script_20201107.R
+Rscript Fig3_script_20201107.R
 </code>
 </pre>
 
@@ -69,42 +69,51 @@ R Fig3_script_20201107.R
 <pre>
 <code>
     # Fig1_script_20201107.R
+    ## set working directory
     setwd("./")
+    ## input files
     data <- read.table("1000ctrl/0.summary_Phy_CSAV_20190321.marked_targets.info",sep='\t',header = T)
     data <- read.table("1000ctrl/0.summary_Phy_CSCV_20190321.marked_targets.info",sep='\t',header = T)
     data <- read.table("1000ctrl/0.summary_Phy_CSNV_20190321.marked_targets.info",sep='\t',header = T)
     data <- read.table("61ctrl/0.summary_Phy_CSAV_20201011.txt",sep='\t',header = T)
     data <- read.table("61ctrl/0.summary_Phy_CSCV_20201011.txt",sep='\t',header = T)
     data <- read.table("61ctrl/0.summary_Phy_CSNV_20201011.txt",sep='\t',header = T)
+    ## output files
     pdf("./Fig1d_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
     pdf("./Fig1e_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
     pdf("./Fig1f_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
     pdf("./Fig1g_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
     
     # Fig2_script_20201107.R
+    ## set working directory
     setwd("./")
+    ## input files
     fNAME = "1000ctrl/0.summary_Phy_CSAV_20190321.marked_targets.info"
     fNAME = "1000ctrl/0.summary_Phy_CSCV_20190321.marked_targets.info"
     fNAME = "1000ctrl/0.summary_Phy_CSNV_20190321.marked_targets.info"
     fNAME = "61ctrl/0.summary_Phy_CSAV_20201011.txt"
     fNAME = "61ctrl/0.summary_Phy_CSCV_20201011.txt"
     fNAME = "61ctrl/0.summary_Phy_CSNV_20201011.txt"
+    ## output files
     pdf("./Fig2_1000randomctrl_v20201011.pdf",width=8,height=6)
     pdf("./FigS4_61corectrl_v20201011.pdf",width=8,height=6)
         
     # Fig4_script_20201107.R
+    ## set working directory
     setwd("./")
+    ## input files
     data <- read.table("1000ctrl/0.summary_Phy_CSAV_20190321.marked_targets.info",sep='\t',header = T)
     data <- read.table("1000ctrl/0.summary_Phy_CSCV_20190321.marked_targets.info",sep='\t',header = T)
     data <- read.table("1000ctrl/0.summary_Phy_CSNV_20190321.marked_targets.info",sep='\t',header = T)
     data <- read.table("61ctrl/0.summary_Phy_CSAV_20201011.txt",sep='\t',header = T)
     data <- read.table("61ctrl/0.summary_Phy_CSCV_20201011.txt",sep='\t',header = T)
     data <- read.table("61ctrl/0.summary_Phy_CSNV_20201011.txt",sep='\t',header = T)
+    ## output files
     pdf("./Fig4_1000randomctrl_v20201022.pdf",width=16,height=16)
-    pdf("./FigS5_61corectrl_v20201022.pdf",width=16,height=16)
     write.csv(data_matrix, file = "FigS6a.csv")
-    write.csv(data_matrix, file = "FigS6b.csv")
     write.csv(data_matrix, file = "FigS6c.csv")
+    pdf("./FigS5_61corectrl_v20201022.pdf",width=16,height=16)
+    write.csv(data_matrix, file = "FigS6b.csv")
     write.csv(data_matrix, file = "FigS6d.csv")
 </code>
 </pre>
