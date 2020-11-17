@@ -1,5 +1,5 @@
 # Overview
-This section includes inputs and commanders to perform multiple sequence alignments for primate lineage and to merge primate and avian alignments.
+This section includes inputs and commanders for multiple sequence alignments of orthologous genes of primates and birds.
 
   * **download_link.txt**: Links to download coding sequences (CDS) of each species
   * **03.ENSPtoENST_1to1_ortho_woHumanspecificgene_20180908.txt**: Orthologous genes of 24 primates
