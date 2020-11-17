@@ -1,16 +1,14 @@
 # Overview
-This script to visualize correlations among the number of molecular convergences at 3 levels (amino acids, codons, and nucleotides) and the phylogenetic features (POB, PTB, DTN, and DTB). 
+The scripts to visualize correlations among the number of molecular convergences at 3 levels (amino acids, codons, and nucleotides) and the phylogenetic features (POB, PTB, DTN, and DTB). 
 ## Input Files
-It needs multiple peptide sequence aglinments as input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format). 
+It needs text files (.txt) with counts of types of molecular convergences as input files.
 ## Variables in Script
-  1. input path
-  2. input file format
-  3. whole species list 
-  4. target species list # avian vocal learners 
-  5. outgroup species list # Rifleman with the uncertainty for vocal learning ability
-  6. output path
+  1. working directory
+  2. input files
+  3. output names
+  
 ## Output Files
-It generates a text file (.txt) as a output with a summary of CSAV analysis and the full amino acids of whole species list at identified CSAV sites.
+It generates visualization items and data matrix for correlations (.pdf and .csv) as outputs.
 - - -
 
 # System Requirments
@@ -24,13 +22,13 @@ This script is supported for *Windows OS* and *Linux*. The script has been teste
 * Linux: Ubuntu 18.04.3 LTS
 
 ## Python Dependencies
-This script mainly depends on the Python scientific stack.
+This script mainly depends on the following packages in R (v3.5.3).
 
-    numpy
-    scipy
+    install.packages("rlang") # v0.4.5
+    install.packages("car") # v3.0-10
 
 ## Running time with the demo data
-* 2 min 13.064760 sec
+* under 1 min
 - - -
 
 # Running the script
@@ -51,41 +49,57 @@ cd CSAVanalysis-master/
 </code>
 </pre>
 
-* Decompress the demo data of input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format)
-<pre>
-<code>
-cd 0.rawdata/MSA/
-unzip MSA.zip
-cd ../../
-</code>
-</pre>
-
 * Run the script
 <pre>
 <code>
-cd 1.CSAV/bin/
-python CSAV.py
+cd 6.CorrelationPlots/
+R Fig1_script_20201107.R
+R Fig2_script_20201107.R
+R Fig3_script_20201107.R
 </code>
 </pre>
 
 (Optional step to check inputs before running the script)
   - This sciprt requires following variables:
-  1. input path
-  2. input file format
-  3. whole species list 
-  4. target species list
-  5. outgroup species list
-  6. output path
+  1. working directory
+  2. input files
+  3. output names
 
   - Example variables in the script
 <pre>
 <code>
-    seqPATH = "../../0.rawdata/MSA/pep/"
-    seqFORM = ".sate.default.pep.removed.shortname.fasta"
-    sID_LIST = ['TAEGU','GEOFO','CORBR','MELUN','NESNO','CALAN','MANVI','FALPE','CARCR','MERNU','PICPU','BUCRH','APAVI','LEPDI','COLST','TYTAL','HALLE','HALAL','CATAU','PELCR','EGRGA','NIPNI','PHACA','FULGL','PYGAD','APTFO','GAVST','PHALE','EURHE','CHAVO','BALRE','OPHHO','CHAPE','CAPCA','CHLUN','TAUER','CUCCA','MESUN','PTEGU','COLLI','PHORU','PODCR','GALGA','MELGA','ANAPL','TINMA','STRCA','HUMAN','ACACH']
-    nTargets = 'TAEGU,GEOFO,CORBR,MELUN,NESNO,CALAN'
-    outgroup_LIST = ['HUMAN','ACACH']
-    oPATH = "../output/"
+    # Fig1_script_20201107.R
+    setwd("./")
+    data <- read.table("1000ctrl/0.summary_Phy_CSAV_20190321.marked_targets.info",sep='\t',header = T)
+    data <- read.table("1000ctrl/0.summary_Phy_CSCV_20190321.marked_targets.info",sep='\t',header = T)
+    data <- read.table("1000ctrl/0.summary_Phy_CSNV_20190321.marked_targets.info",sep='\t',header = T)
+    data <- read.table("61ctrl/0.summary_Phy_CSAV_20201011.txt",sep='\t',header = T)
+    data <- read.table("61ctrl/0.summary_Phy_CSCV_20201011.txt",sep='\t',header = T)
+    data <- read.table("61ctrl/0.summary_Phy_CSNV_20201011.txt",sep='\t',header = T)
+    pdf("./Fig1d_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
+    pdf("./Fig1e_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
+    pdf("./Fig1f_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
+    pdf("./Fig1g_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
+    
+    # Fig2_script_20201107.R
+    setwd("./")
+    fNAME = "1000ctrl/0.summary_Phy_CSAV_20190321.marked_targets.info"
+    fNAME = "1000ctrl/0.summary_Phy_CSCV_20190321.marked_targets.info"
+    fNAME = "1000ctrl/0.summary_Phy_CSNV_20190321.marked_targets.info"
+    fNAME = "61ctrl/0.summary_Phy_CSAV_20201011.txt"
+    fNAME = "61ctrl/0.summary_Phy_CSCV_20201011.txt"
+    fNAME = "61ctrl/0.summary_Phy_CSNV_20201011.txt"
+    pdf("./Fig2_1000randomctrl_v20201011.pdf",width=8,height=6)
+    pdf("./FigS4_61corectrl_v20201011.pdf",width=8,height=6)
+        
+    # Fig4_script_20201107.R
+    setwd("./")
+    pdf("./Fig4_1000randomctrl_v20201022.pdf",width=16,height=16)
+    pdf("./FigS5_61corectrl_v20201022.pdf",width=16,height=16)
+    write.csv(data_matrix, file = "FigS6a.csv")
+    write.csv(data_matrix, file = "FigS6b.csv")
+    write.csv(data_matrix, file = "FigS6c.csv")
+    write.csv(data_matrix, file = "FigS6d.csv")
 </code>
 </pre>
 
