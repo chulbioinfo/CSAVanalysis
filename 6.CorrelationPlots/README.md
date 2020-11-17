@@ -21,7 +21,7 @@ This script is supported for *Windows OS* and *Linux*. The script has been teste
 * Windows 10 Education
 * Linux: Ubuntu 18.04.3 LTS
 
-## Python Dependencies
+## R Dependencies
 This script mainly depends on the following packages in R (v3.5.3).
 
     install.packages("rlang") # v0.4.5
