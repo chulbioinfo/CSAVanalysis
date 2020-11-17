@@ -1,5 +1,0 @@
-# Targets: HOMSA
-# Target group: HOMSA / OriBL: 0.00660945
-# Number of independent origins: 1
-# Product of Origin branch lengths: 0.00660945
-0.00660945
