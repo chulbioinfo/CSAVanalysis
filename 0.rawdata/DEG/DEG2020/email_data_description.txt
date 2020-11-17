@@ -1,6 +1,0 @@
-Hi Chul, 
-
-Please find the final gene list for the zebra finch RNAseq experiments attached. This data is from four adult male zebra finches, with specialized expression (up and down) for each song nuclei significant at q < 0.05 on the new VGP zebra finch assembly and annotation. Several of those 8 genes Erich listed below are differentially expressed. Please let me know if you need anything else. 
-
-Best, 
-Greg 

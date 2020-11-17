@@ -1,0 +1,22 @@
+# Targets: TAEGU,GEOFO,CORBR,MELUN,NESNO,CALAN
+# Target group: TAEGU,GEOFO,CORBR / SumBL: 0.1862
+# Target group: MELUN,NESNO / SumBL: 0.1533
+# Target group: CALAN / SumBL: 0.1126
+# Others group: MANVI / SumBL: 0.0693
+# Others group: FALPE / SumBL: 0.0762
+# Others group: CARCR / SumBL: 0.055
+# Others group: MERNU,PICPU,BUCRH,APAVI,LEPDI,COLST,TYTAL,HALLE,HALAL,CATAU / SumBL: 0.7939
+# Others group: PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE / SumBL: 0.4934
+# Others group: CHAVO,BALRE,OPHHO / SumBL: 0.1953
+# Others group: CHAPE / SumBL: 0.0908
+# Others group: CAPCA / SumBL: 0.0697
+# Others group: CHLUN,TAUER,CUCCA / SumBL: 0.2579
+# Number of independent origins of targets: 3
+# Distance between Termianl Nodes (DTN): 0.5364
+# Distance between Terminal Branches (DTB): 0.2056
+# Product of origin branch length (POB): 0.00026159231999999997
+# Sum of origin branch length (SOB): 0.2094
+# Product of terminal branch length (PTB): 1.6641654709680004e-08
+# Sum of terminal branch length (STB): 0.3308
+# DistanceTN,DistanceTB,ProOriBL,SumOriBL,ProTerBL,SumTerBL
+0.5364,0.2056,0.00026159231999999997,0.2094,1.6641654709680004e-08,0.3308

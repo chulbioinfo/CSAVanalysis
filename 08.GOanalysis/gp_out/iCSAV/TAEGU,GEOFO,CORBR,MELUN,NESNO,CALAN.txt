@@ -1,0 +1,2 @@
+term.id	query.number	significant	p.value	term.size	query.size	overlap.size	recall	precision	term.id	domain	subgraph.number	term.name	relative.depth	intersection
+GO:0007612	1	True	0.042	145	22	4	0.182	0.027999999999999997	GO:0007612	BP	1	   learning	1	PRKAR2B,TANC1,LRRN4,DRD5
