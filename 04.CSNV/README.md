@@ -1,12 +1,12 @@
 # Overview
-This script to run 'CSNV' analysis to idenify convergent single nucleotide variants (CSNVs) of target species which share a convergent trait you are interested in. Based on this script and demo data, you can find CSNVs of avian vocal learners mutually exclusive to nucleotides of vocal non-learners. 
+This script to run 'CSNV' analysis to idenify convergent single nucleotide variants (CSNVs) of target species which share a convergent trait you are interested in. Based on this script and demo data, you can find CSNVs of avian vocal learners mutually exclusive to nucleotides of vocal non-learners.
 ## Input Files
-It needs multiple codon sequence aglinments as input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format). 
+It needs multiple codon sequence aglinments as input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format).
 ## Variables in Script
   1. input path
   2. input file format
-  3. whole species list 
-  4. target species list # avian vocal learners 
+  3. whole species list
+  4. target species list # avian vocal learners
   5. outgroup species list # Rifleman with the uncertainty for vocal learning ability
   6. output path
 ## Output Files
@@ -63,7 +63,7 @@ cd ../../
 * Run the script
 <pre>
 <code>
-cd 4.CSNV/bin/
+cd 04.CSNV/bin/
 python CSNV.py
 </code>
 </pre>
@@ -72,7 +72,7 @@ python CSNV.py
   - This sciprt requires following variables:
   1. input path
   2. input file format
-  3. whole species list 
+  3. whole species list
   4. target species list
   5. outgroup species list
   6. output path
@@ -96,4 +96,3 @@ python CSNV.py
 
 # License
 This project is covered under the Apache 2.0 License.
-

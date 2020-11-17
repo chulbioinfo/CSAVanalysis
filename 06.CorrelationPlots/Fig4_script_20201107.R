@@ -1,5 +1,5 @@
 # Please set workding direcotry into "6.CorrelationPlots" in zipfile
-setwd("E:\\GoogleDrive\\Research\\2020\\Avian_vocal_learning_20201020\\Final_Draft\\GitHub\\VocalLearningBirds_2020\\Vocallearningbirds_2020\\6.CorrelationPlots\\")
+setwd("./")
 
 
 # Library
@@ -63,7 +63,7 @@ R_plot <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var,
         tmp_tmp_p = "**"
         if(tmp_p < 0.001){
           tmp_tmp_p = "***"
-        } 
+        }
       }
     }
   }
@@ -81,14 +81,14 @@ correlation_plot <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, nam
   points(tmp_ind_var,
          tmp_dep_var,
          col="grey",pch=20)
-  
+
   dep_ind_var.lm = lm(tmp_dep_var ~ tmp_ind_var)
   abline(dep_ind_var.lm,col="blue",lwd = 1,lty=1)# lty=2 # dashed line
-  
+
   points(tmp_ind_var[rownames(tmp_data)=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[rownames(tmp_data)=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          col="red",pch=15)
-  
+
   outlierTest(dep_ind_var.lm,n.max=3)
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm,n.max=3)$rstudent))))
   points(tmp_ind_var[outlier_list], tmp_dep_var[outlier_list], col="black",pch=4)
@@ -101,14 +101,14 @@ correlation_plot_with_XYax <- function(tmp_ind_var, tmp_dep_var, nTitle, name_in
   points(tmp_ind_var,
          tmp_dep_var,
          col="grey",pch=20)
-  
+
   dep_ind_var.lm = lm(tmp_dep_var ~ tmp_ind_var)
   abline(dep_ind_var.lm,col="blue",lwd = 1,lty=1)# lty=2 # dashed line
-  
+
   points(tmp_ind_var[rownames(tmp_data)=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[rownames(tmp_data)=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          col="red",pch=15)
-  
+
   outlierTest(dep_ind_var.lm,n.max=3)
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm,n.max=3)$rstudent))))
   points(tmp_ind_var[outlier_list], tmp_dep_var[outlier_list], col="black",pch=4)
@@ -121,14 +121,14 @@ correlation_plot_with_Xax <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind
   points(tmp_ind_var,
          tmp_dep_var,
          col="grey",pch=20)
-  
+
   dep_ind_var.lm = lm(tmp_dep_var ~ tmp_ind_var)
   abline(dep_ind_var.lm,col="blue",lwd = 1,lty=1)# lty=2 # dashed line
-  
+
   points(tmp_ind_var[rownames(tmp_data)=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[rownames(tmp_data)=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          col="red",pch=15)
-  
+
   outlierTest(dep_ind_var.lm,n.max=3)
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm,n.max=3)$rstudent))))
   points(tmp_ind_var[outlier_list], tmp_dep_var[outlier_list], col="black",pch=4)
@@ -141,14 +141,14 @@ correlation_plot_with_Yax <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind
   points(tmp_ind_var,
          tmp_dep_var,
          col="grey",pch=20)
-  
+
   dep_ind_var.lm = lm(tmp_dep_var ~ tmp_ind_var)
   abline(dep_ind_var.lm,col="blue",lwd = 1,lty=1)# lty=2 # dashed line
-  
+
   points(tmp_ind_var[rownames(tmp_data)=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[rownames(tmp_data)=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          col="red",pch=15)
-  
+
   outlierTest(dep_ind_var.lm,n.max=3)
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm,n.max=3)$rstudent))))
   points(tmp_ind_var[outlier_list], tmp_dep_var[outlier_list], col="black",pch=4)
@@ -157,7 +157,7 @@ correlation_plot_with_Yax <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind
 
 
 # correlation test matrix
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
+data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13)
 for(i in 1:length(colnames(tmp_data))){
   data_list = list()
   for(j in 1:length(colnames(tmp_data))){
@@ -170,7 +170,7 @@ for(i in 1:length(colnames(tmp_data))){
         data_matrix[i,j] = tmp_p
       }else{
         tmp_rho = dep_ind_var.cor$estimate
-        data_matrix[i,j] = tmp_rho 
+        data_matrix[i,j] = tmp_rho
       }
     }
   }
@@ -184,7 +184,7 @@ write.csv(data_matrix, file = "FigS6a.csv")
 
 
 # regression test matrix
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
+data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13)
 for(i in 1:length(colnames(tmp_data))){
   data_list = list()
   for(j in 1:length(colnames(tmp_data))){
@@ -198,7 +198,7 @@ for(i in 1:length(colnames(tmp_data))){
         data_matrix[i,j] = tmp_p
       }else{
         tmp_r2 = lm.sum$adj.r.squared
-        data_matrix[i,j] = tmp_r2 
+        data_matrix[i,j] = tmp_r2
       }
     }
   }
@@ -241,7 +241,7 @@ for(i in 1:length(colnames(tmp_data))){
             correlation_plot_with_XYax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
           }else{
             #par(oma=c(0,0,0,0))
-            correlation_plot_with_XYax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)  
+            correlation_plot_with_XYax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
           }
         }
       }
@@ -298,7 +298,7 @@ rownames(tmp_data)<-data$nTargets
 
 
 # correlation test matrix
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
+data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13)
 for(i in 1:length(colnames(tmp_data))){
   data_list = list()
   for(j in 1:length(colnames(tmp_data))){
@@ -311,7 +311,7 @@ for(i in 1:length(colnames(tmp_data))){
         data_matrix[i,j] = tmp_p
       }else{
         tmp_rho = dep_ind_var.cor$estimate
-        data_matrix[i,j] = tmp_rho 
+        data_matrix[i,j] = tmp_rho
       }
     }
   }
@@ -325,7 +325,7 @@ write.csv(data_matrix, file = "FigS6b.csv")
 
 
 # regression test matrix
-data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13) 
+data_matrix = matrix(c(1:(13*13)),nrow=13,ncol=13)
 for(i in 1:length(colnames(tmp_data))){
   data_list = list()
   for(j in 1:length(colnames(tmp_data))){
@@ -339,7 +339,7 @@ for(i in 1:length(colnames(tmp_data))){
         data_matrix[i,j] = tmp_p
       }else{
         tmp_r2 = lm.sum$adj.r.squared
-        data_matrix[i,j] = tmp_r2 
+        data_matrix[i,j] = tmp_r2
       }
     }
   }
@@ -379,7 +379,7 @@ for(i in 1:length(colnames(tmp_data))){
             correlation_plot_with_XYax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
           }else{
             #par(oma=c(0,0,0,0))
-            correlation_plot_with_XYax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)  
+            correlation_plot_with_XYax(tmp_data[,i],tmp_data[,j],"","","",tmp_data)
           }
         }
       }
@@ -387,4 +387,3 @@ for(i in 1:length(colnames(tmp_data))){
   }
 }
 dev.off()
-

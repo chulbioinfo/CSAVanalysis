@@ -1,5 +1,5 @@
 # Please set workding direcotry into "6.CorrelationPlots" in zipfile
-setwd("E:\\GoogleDrive\\Research\\2020\\Avian_vocal_learning_20201020\\Final_Draft\\GitHub\\VocalLearningBirds_2020\\Vocallearningbirds_2020\\6.CorrelationPlots\\")
+setwd("./")
 
 #install.packages("rlang")
 #install.packages("car")
@@ -31,7 +31,7 @@ detach(data)
 
 data <- cbind.data.frame(tmp_data_CSAV$nTargets,
                                        tmp_data_CSAV$ctrl,
-                                       tmp_phylo_info, 
+                                       tmp_phylo_info,
                                        tmp_data_CSAV$iCSAV,
                                        tmp_data_CSCV$iCSCV,
                                        tmp_data_CSNV$iCSNV,
@@ -55,10 +55,10 @@ Fig_1d <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   points(tmp_ind_var[data$ctrl=="1"],
          tmp_dep_var[data$ctrl=="1"],
          col="grey",pch=20)
-  
+
   dep_ind_var.lm = lm(tmp_dep_var ~ tmp_ind_var)
   abline(dep_ind_var.lm,col="blue",lwd = 1,lty=1)# lty=2 # dashed line
-  
+
   points(tmp_ind_var[data$nTargets=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[data$nTargets=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          col="red",pch=15)
@@ -67,12 +67,12 @@ Fig_1d <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   tmp_matrix = cbind(as.vector(outlier_list),as.vector(data$nTargets[outlier_list]),as.vector(outlierTest(dep_ind_var.lm, cutoff = Inf, n.max=Inf)$bonf.p))
   print(tmp_matrix[tmp_matrix[,2]=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"])
   #print(tmp_matrix)
-  
+
   outlierTest(dep_ind_var.lm,n.max=3)
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm,n.max=3)$rstudent))))
   points(tmp_ind_var[outlier_list], tmp_dep_var[outlier_list], col="black",pch=4)
   print(cbind(as.vector(data$nTargets[outlier_list]),as.vector(tmp_ind_var[outlier_list]),as.vector(tmp_dep_var[outlier_list])))
-  
+
   lm.sum = summary(dep_ind_var.lm)
   tmp_r2 = lm.sum$adj.r.squared
   tmp_p = lm.sum$coefficients[2,4]
@@ -84,7 +84,7 @@ Fig_1d <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
         tmp_tmp_p = "0.01**"
         if(tmp_p < 0.001){
           tmp_tmp_p = "0.001***"
-        } 
+        }
       }
     }
   }
@@ -120,14 +120,14 @@ Fig_1e <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   points(tmp_ind_var[data$ctrl=="1"],
          tmp_dep_var[data$ctrl=="1"],
          col="grey",pch=20)
-  
+
   dep_ind_var.lm = lm(tmp_dep_var ~ tmp_ind_var)
   abline(dep_ind_var.lm,col="blue",lwd = 1,lty=1)# lty=2 # dashed line
 
   points(tmp_ind_var[data$nTargets=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[data$nTargets=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          col="red",pch=15)
-  
+
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm, cutoff = Inf, n.max=Inf)$rstudent))))
   tmp_matrix = cbind(as.vector(outlier_list),as.vector(data$nTargets[outlier_list]),as.vector(outlierTest(dep_ind_var.lm, cutoff = Inf, n.max=Inf)$bonf.p))
   print(tmp_matrix[tmp_matrix[,2]=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"])
@@ -137,7 +137,7 @@ Fig_1e <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm,n.max=3)$rstudent))))
   points(tmp_ind_var[outlier_list], tmp_dep_var[outlier_list], col="black",pch=4)
   print(cbind(as.vector(data$nTargets[outlier_list]),as.vector(tmp_ind_var[outlier_list]),as.vector(tmp_dep_var[outlier_list])))
-  
+
   lm.sum = summary(dep_ind_var.lm)
   tmp_r2 = lm.sum$adj.r.squared
   tmp_p = lm.sum$coefficients[2,4]
@@ -149,7 +149,7 @@ Fig_1e <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
         tmp_tmp_p = "0.01**"
         if(tmp_p < 0.001){
           tmp_tmp_p = "0.001***"
-        } 
+        }
       }
     }
   }
@@ -201,7 +201,7 @@ detach(data)
 
 data <- cbind.data.frame(tmp_data_CSAV$nTargets,
                          tmp_data_CSAV$ctrl,
-                         tmp_phylo_info, 
+                         tmp_phylo_info,
                          tmp_data_CSAV$iCSAV,
                          tmp_data_CSCV$iCSCV,
                          tmp_data_CSNV$iCSNV,
@@ -224,16 +224,16 @@ Fig_1f <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   points(tmp_ind_var[data$ctrl=="1"],
          tmp_dep_var[data$ctrl=="1"],
          col="grey",pch=20)
-  
+
   # regression analysis
   dep_ind_var.lm = lm(tmp_dep_var ~ tmp_ind_var)
   abline(dep_ind_var.lm,col="blue",lwd = 1,lty=1)# lty=2 # dashed line
-  
+
   # set of birds of prey
   points(tmp_ind_var[data$nTargets=="FALPE,CARCR,TYTAL,HALLE,HALAL,CATAU"],
          tmp_dep_var[data$nTargets=="FALPE,CARCR,TYTAL,HALLE,HALAL,CATAU"],
          col="purple",pch=17)
-  
+
   # set of waterbirds
   points(tmp_ind_var[data$nTargets=="PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE,CHAVO,BALRE,PHORU,PODCR,ANAPL"],
          tmp_dep_var[data$nTargets=="PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE,CHAVO,BALRE,PHORU,PODCR,ANAPL"],
@@ -243,7 +243,7 @@ Fig_1f <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   points(tmp_ind_var[data$nTargets=="CHAPE,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[data$nTargets=="CHAPE,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          col="orange",pch=18)
-  
+
   # set of vocal learners
   points(tmp_ind_var[data$nTargets=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[data$nTargets=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
@@ -254,12 +254,12 @@ Fig_1f <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   tmp_matrix = cbind(as.vector(outlier_list),as.vector(data$nTargets[outlier_list]),as.vector(outlierTest(dep_ind_var.lm, cutoff = Inf, n.max=Inf)$bonf.p))
   print(tmp_matrix[tmp_matrix[,2]=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"])
   #print(tmp_matrix)
-  
+
   outlierTest(dep_ind_var.lm,n.max=3)
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm,n.max=3)$rstudent))))
   points(tmp_ind_var[outlier_list], tmp_dep_var[outlier_list], col="black",pch=4)
   print(cbind(as.vector(data$nTargets[outlier_list]),as.vector(tmp_ind_var[outlier_list]),as.vector(tmp_dep_var[outlier_list])))
-  
+
   lm.sum = summary(dep_ind_var.lm)
   tmp_r2 = lm.sum$adj.r.squared
   tmp_p = lm.sum$coefficients[2,4]
@@ -271,7 +271,7 @@ Fig_1f <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
         tmp_tmp_p = "0.01**"
         if(tmp_p < 0.001){
           tmp_tmp_p = "0.001***"
-        } 
+        }
       }
     }
   }
@@ -306,26 +306,26 @@ Fig_1g <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   points(tmp_ind_var[data$ctrl=="1"],
          tmp_dep_var[data$ctrl=="1"],
          col="grey",pch=20)
-  
+
   # regression analysis
   dep_ind_var.lm = lm(tmp_dep_var ~ tmp_ind_var)
   abline(dep_ind_var.lm,col="blue",lwd = 1,lty=1)# lty=2 # dashed line
-  
+
   # set of birds of prey
   points(tmp_ind_var[data$nTargets=="FALPE,CARCR,TYTAL,HALLE,HALAL,CATAU"],
          tmp_dep_var[data$nTargets=="FALPE,CARCR,TYTAL,HALLE,HALAL,CATAU"],
          col="purple",pch=17)
-  
+
   # set of waterbirds
   points(tmp_ind_var[data$nTargets=="PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE,CHAVO,BALRE,PHORU,PODCR,ANAPL"],
          tmp_dep_var[data$nTargets=="PELCR,EGRGA,NIPNI,PHACA,FULGL,PYGAD,APTFO,GAVST,PHALE,EURHE,CHAVO,BALRE,PHORU,PODCR,ANAPL"],
          col="blue",pch=16)
-  
+
   # set of closest control set
   points(tmp_ind_var[data$nTargets=="CHAPE,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[data$nTargets=="CHAPE,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          col="orange",pch=18)
-  
+
   # set of vocal learners
   points(tmp_ind_var[data$nTargets=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
          tmp_dep_var[data$nTargets=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"],
@@ -336,15 +336,15 @@ Fig_1g <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
   tmp_matrix = cbind(as.vector(outlier_list),as.vector(data$nTargets[outlier_list]),as.vector(outlierTest(dep_ind_var.lm, cutoff = Inf, n.max=Inf)$bonf.p))
   print(tmp_matrix[tmp_matrix[,2]=="CALAN,CORBR,GEOFO,MELUN,NESNO,TAEGU"])
   #print(tmp_matrix)
-  
+
 
   outlierTest(dep_ind_var.lm,n.max=3)
-  
+
   outlier_list <- unlist(as.numeric(names(unlist(outlierTest(dep_ind_var.lm,n.max=3)$rstudent))))
   points(tmp_ind_var[outlier_list], tmp_dep_var[outlier_list], col="black",pch=4)
   print(cbind(as.vector(data$nTargets[outlier_list]),as.vector(tmp_ind_var[outlier_list]),as.vector(tmp_dep_var[outlier_list])))
   #print(cbind(as.vector(data$nTargets),as.vector(tmp_ind_var),as.vector(tmp_dep_var)))
-  
+
   lm.sum = summary(dep_ind_var.lm)
   tmp_r2 = lm.sum$adj.r.squared
   tmp_p = lm.sum$coefficients[2,4]
@@ -356,7 +356,7 @@ Fig_1g <- function(tmp_ind_var, tmp_dep_var, nTitle, name_ind_var, name_dep_var)
         tmp_tmp_p = "0.01**"
         if(tmp_p < 0.001){
           tmp_tmp_p = "0.001***"
-        } 
+        }
       }
     }
   }
@@ -381,7 +381,3 @@ pdf("./Fig1g_iCSAV_POB_corectrl_v20201011.pdf",width=6,height=6)
 layout(mat = matrix(c(1),1,1,byrow=T))
 Fig_1g(data$POB,data$iCSAV,"iCSAV/POB of core controls (n=62)", "Product of origin branch lengths (POB)", "Identical amino acid convergences (iCSAV)")
 dev.off()
-
-
-
-

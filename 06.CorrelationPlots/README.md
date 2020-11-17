@@ -1,12 +1,12 @@
 # Overview
-The scripts to visualize correlations among the number of molecular convergences at 3 levels (amino acids, codons, and nucleotides) and the phylogenetic features (POB, PTB, DTN, and DTB). 
+The scripts to visualize correlations among the number of molecular convergences at 3 levels (amino acids, codons, and nucleotides) and the phylogenetic features (POB, PTB, DTN, and DTB).
 ## Input Files
 It needs text files (.txt) with counts of types of molecular convergences as input files.
 ## Variables in Script
   1. working directory
   2. input files
   3. output names
-  
+
 ## Output Files
 It generates visualization items and data matrix for correlations (.pdf and .csv) as outputs.
 - - -
@@ -52,7 +52,7 @@ cd CSAVanalysis-master/
 * Run the script
 <pre>
 <code>
-cd 6.CorrelationPlots/
+cd 06.CorrelationPlots/
 Rscript Fig1_script_20201107.R
 Rscript Fig2_script_20201107.R
 Rscript Fig3_script_20201107.R
@@ -83,7 +83,7 @@ Rscript Fig3_script_20201107.R
     pdf("./Fig1e_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
     pdf("./Fig1f_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
     pdf("./Fig1g_iCSAV_dCSAV_randomctrl_v20201011.pdf",width=6,height=6)
-    
+
     # Fig2_script_20201107.R
     ## set working directory
     setwd("./")
@@ -97,7 +97,7 @@ Rscript Fig3_script_20201107.R
     ## output files
     pdf("./Fig2_1000randomctrl_v20201011.pdf",width=8,height=6)
     pdf("./FigS4_61corectrl_v20201011.pdf",width=8,height=6)
-        
+
     # Fig4_script_20201107.R
     ## set working directory
     setwd("./")
@@ -125,4 +125,3 @@ Rscript Fig3_script_20201107.R
 
 # License
 This project is covered under the Apache 2.0 License.
-

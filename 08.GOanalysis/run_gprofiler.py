@@ -1,7 +1,13 @@
 from gprofiler import gprofiler
 import pandas
-import sys,re,os,string,glob
-import queue,threading,time
+import sys
+import re
+import os
+import string
+import glob
+import queue
+import threading
+import time
 
 def gprofiler_enrichment(gene_list,oNAME):
   enrichment = gprofiler(gene_list, organism='hsapiens')
@@ -50,7 +56,7 @@ def main():
     t.start()
 
   for datatype_PATH in ["iCSAV"]:
-    
+
       iPATH = "gp_in/" + datatype_PATH + varianttype_PATH
       oPATH = "gp_out/" + datatype_PATH + varianttype_PATH
       flist = glob.glob(iPATH+"*.txt")

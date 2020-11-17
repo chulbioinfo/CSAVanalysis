@@ -1,9 +1,9 @@
 # Overview
-This script to run 'PhylogeneticFeatureCalculator' to calculate 4 types of phylogenetic features: product of origin branch lengths (POB), product of termianl branch lengths (PTB), distance betwen terminal nodes (DTN), and distance between terminal branches (DTB). 
+This script to run 'PhylogeneticFeatureCalculator' to calculate 4 types of phylogenetic features: product of origin branch lengths (POB), product of termianl branch lengths (PTB), distance betwen terminal nodes (DTN), and distance between terminal branches (DTB).
 ## Input Files
-It does not need any input file. 
+It does not need any input file.
 ## Variables in Script
-  1. target species list # avian vocal learners 
+  1. target species list # avian vocal learners
   2. phylogenetic tree with branch lengths
 ## Output Files
 It generates a text file (.txt) as a output with a summary of phylogenetic features of target species.
@@ -47,7 +47,7 @@ cd CSAVanalysis-master/
 * Run the script
 <pre>
 <code>
-cd 2.PhylogeneticFeatures/
+cd 02.PhylogeneticFeatures/
 python PhylogeneticFeatureCalculator.py
 </code>
 </pre>
@@ -72,4 +72,3 @@ python PhylogeneticFeatureCalculator.py
 
 # License
 This project is covered under the Apache 2.0 License.
-
