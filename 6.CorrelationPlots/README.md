@@ -94,6 +94,12 @@ R Fig3_script_20201107.R
         
     # Fig4_script_20201107.R
     setwd("./")
+    data <- read.table("1000ctrl/0.summary_Phy_CSAV_20190321.marked_targets.info",sep='\t',header = T)
+    data <- read.table("1000ctrl/0.summary_Phy_CSCV_20190321.marked_targets.info",sep='\t',header = T)
+    data <- read.table("1000ctrl/0.summary_Phy_CSNV_20190321.marked_targets.info",sep='\t',header = T)
+    data <- read.table("61ctrl/0.summary_Phy_CSAV_20201011.txt",sep='\t',header = T)
+    data <- read.table("61ctrl/0.summary_Phy_CSCV_20201011.txt",sep='\t',header = T)
+    data <- read.table("61ctrl/0.summary_Phy_CSNV_20201011.txt",sep='\t',header = T)
     pdf("./Fig4_1000randomctrl_v20201022.pdf",width=16,height=16)
     pdf("./FigS5_61corectrl_v20201022.pdf",width=16,height=16)
     write.csv(data_matrix, file = "FigS6a.csv")
