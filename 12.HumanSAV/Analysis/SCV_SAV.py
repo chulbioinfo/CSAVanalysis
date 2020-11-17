@@ -1,22 +1,42 @@
 # SAV program
-# demo version 1.0 (7.Nov.2020)
-# written by Chul Lee
+# Version 1.0 (17.Nov.2020)
+# written by Chul Lee (e-mail: chul.bioinfo@gmail.com)
+# This code was developed and conducted in Python 3.7.1 (v3.7.1:260ec2c36a, Oct 20 2018, 14:57:15) [MSC v.1915 64 bit (AMD64)]
+# OS for development and analysis: Windows 10 Education
 
-print("SAV analysis")
- 
-#from scipy import stats
+# Libraries
+import scipy.stats as stats
 from datetime import datetime
-import os, glob, sys, math, time
+import os
+import glob
+import sys
+import math
+import time
+
+
+# Global variable
+## input
+seqPATH = "./"
+seqFORM = ".best.fas"
+### list of species that is analyzed in this code: If species is not included in this list, it would not be included as the other species
+sID_LIST = ["PANTR","PANPA","HOMSA","GORGO","PONAB","NOMLE","CERAT","MANLE","PAPAN","MACFA","MACMU","MACNE","CHLSA","RHIRO","RHIBI","COLAN","CEBCA","SAIBO","CALJA","AOTNA","CARSY","MICMU","PROCO","OTOGA"]
+### list of target species with a convergent trait 
+nTargets = 'HOMSA'
+### list of outgroup species excluded in the other species but recorded with amino acid of the outgroup species
+outgroup_LIST = []
+## output PATH
+oPATH   = "./"
+
+
+# Automated variables
+targetID_LIST = nTargets.split(',')
+tmpTargets = nTargets.replace(',','_')
+
+## setting start time
 startTime = datetime.today()
 print("Start time")
 print(startTime)
-################################ Global variable ############################
-try:
-    nTargets = sys.argv[1]
-except: # default targets = six avian vocal learners in 47 birds
-    nTargets = 'HOMSA'
 
-## setting date
 nYear   = str(datetime.today().year)
 nMonth  = str(datetime.today().month)
 nDay    = str(datetime.today().day)
@@ -33,21 +53,7 @@ if len(nMin)==1:
 nDate   = nYear + nMonth + nDay + "_" + nHour + nMin
 
 
-### TAAS
-sID_LIST = ["PANTR","PANPA","HOMSA","GORGO","PONAB","NOMLE","CERAT","MANLE","PAPAN","MACFA","MACMU","MACNE","CHLSA","RHIRO","RHIBI","COLAN","CEBCA","SAIBO","CALJA","AOTNA","CARSY","MICMU","PROCO","OTOGA"]
-outgroup_LIST = []
 
-
-seqPATH = "./"
-#seqPATH = "tmp/test/"
-seqFORM = ".best.fas"
-tmpTargets = nTargets.replace(',','_')
-oPATH   = "./"#tmpTargets + '_' + nDate+'/'
-
-targetID_LIST = nTargets.split(',')
-
-fNAME_symbol = "symbol_info.txt"
-fNAME_SUMMARY = "0." + nTargets + "_SCV_SAV_" + nDate + ".txt"
 
 
 ### ProOriBL
@@ -101,8 +107,8 @@ for sID in tree_sID_list:
 tree_target_list = tmp_tree_target_list
 
 ## Output
-tree_oNAME = "0." + ','.join(tree_target_list)+"_codon_ProOriBLresult_"+nDate+'.txt'
-tree_fpout = open(oPATH + tree_oNAME,'w')
+tree_oNAME = "./POB_output_" + ','.join(tree_target_list)+"_"+nDate+'.txt'
+tree_fpout = open(tree_oNAME,'w')
 tree_fpout.write("# Targets: "+','.join(tree_target_list)+'\n')
 
 
@@ -123,8 +129,12 @@ CODONTABLE_dic  = {'TTT':'F','TTC':'F','TTA':'L','TTG':'L','CTT':'L','CTC':'L','
 
 ### must not include '.', because '.' is used as a marker of loss of gene
 
+fNAME_symbol = "symbol_info.txt"
+## output NAME
+fNAME_SUMMARY = "SCV_SAV_output_" + nTargets + "_" + nDate + ".txt"
+## write output
 FPOUT_SUMMARY = open(oPATH + fNAME_SUMMARY,'w')
-tmpline = "Gene" + '\t' + "Position_Nuc" + '\t' + "TAAS_Type_CODON" + '\t' + "TargetCODON" + '\t' + "OthersCODON" + '\t' + "Pvalue_CODON" + '\t' + "Adj.pvalue_CODON" + '\t' + "Total_Entropy_CODON" + '\t' + "Target_Entropy_CODON" + '\t' + "Others_Entropy_CODON" + "\t"+ "\t".join(sID_LIST)+'\t' + "Position_AA" + '\t' + "TAAS_Type_AA" + '\t' + "TargetAA" + '\t' + "OthersAA" + '\t' + "Pvalue_AA" + '\t' + "Adj.pvalue_AA" + '\t' + "Total_Entropy_AA" + '\t' + "Target_Entropy_AA" + '\t' + "Others_Entropy_AA" + "\t"+ "\t".join(sID_LIST)+'\n'
+tmpline = "Gene" + '\t' + "Position_Nuc" + '\t' + "SCV_Type" + '\t' + "TargetCODON" + '\t' + "OthersCODON" + '\t' + "Total_Entropy_CODON" + '\t' + "Target_Entropy_CODON" + '\t' + "Others_Entropy_CODON" + "\t"+ "\t".join(sID_LIST)+'\t' + "Position_AA" + '\t' + "SAV_Type_AA" + '\t' + "TargetAA" + '\t' + "OthersAA" + '\t' + "Total_Entropy_AA" + '\t' + "Target_Entropy_AA" + '\t' + "Others_Entropy_AA" + "\t"+ "\t".join(sID_LIST)+'\n'
 FPOUT_SUMMARY.write(tmpline)
 
 
@@ -701,7 +711,7 @@ def RUN_TAAS_analysis(sID_list, sID_nSeq_matrix, oNAME, nGene_iCNT_TAAS_dic, tar
         iPos = str(iPos)
         iPos_AA = str(iPos_AA)
         #Result_position = nGene + '\t' + iPos + '\t' + TAAS + '\t' + targetAAs+'\t' + othersAAs + '\t'+str(pvalue)+'\t'+str(adj_pvalue)+ '\t' + str(Total_Entropy)+ '\t' + str(Target_Entropy)+ '\t' + str(Others_Entropy)
-        Result_position = nGene + '\t' + iPos + '\t' + TAAS_CODON + '\t' + targetCODONs+'\t' + othersCODONs + '\t'+str(pvalue_CODON)+'\t'+str(adj_pvalue_CODON)+ '\t' + str(Total_Entropy_CODON)+ '\t' + str(Target_Entropy_CODON)+ '\t' + str(Others_Entropy_CODON)
+        Result_position = nGene + '\t' + iPos + '\t' + TAAS_CODON + '\t' + targetCODONs+'\t' + othersCODONs + '\t' + str(Total_Entropy_CODON)+ '\t' + str(Target_Entropy_CODON)+ '\t' + str(Others_Entropy_CODON)
         
         #fpout.write(Result_position + '\n')                    # Write result of each gene
         print_Entropy += Total_Entropy
@@ -732,7 +742,7 @@ def RUN_TAAS_analysis(sID_list, sID_nSeq_matrix, oNAME, nGene_iCNT_TAAS_dic, tar
                         Result_position += '\t' +""
                     else:
                         Result_position += '\t' +nCODON
-                Result_position += '\t' + iPos_AA + '\t' + TAAS + '\t' + targetAAs+'\t' + othersAAs + '\t'+str(pvalue)+'\t'+str(adj_pvalue)+ '\t' + str(Total_Entropy)+ '\t' + str(Target_Entropy)+ '\t' + str(Others_Entropy)
+                Result_position += '\t' + iPos_AA + '\t' + TAAS + '\t' + targetAAs+'\t' + othersAAs + '\t' + str(Total_Entropy)+ '\t' + str(Target_Entropy)+ '\t' + str(Others_Entropy)
                 totalAA_list = targetAA_list + othersAA_list + outgroupAA_list
                 for nAA in totalAA_list:
                     if nAA == ".":
@@ -765,7 +775,7 @@ flist = glob.glob(seqPATH+"*"+seqFORM)
 iCNT_ortho = len(flist)
 print("Number of processes : " + str(iCNT_ortho))
 print("")
-print("Running TAAS")
+print("Running SAV")
 iProcess = 0
 iPercent = 10
 nGene_iCNT_TAAS_dic = {}
@@ -787,4 +797,4 @@ FPOUT_SUMMARY.close()
 endTime = datetime.today()
 print("Running time")
 print(endTime - startTime)
-print(".........................................Finish TAAS analysis")
+print(".........................................Finish SAV analysis")
