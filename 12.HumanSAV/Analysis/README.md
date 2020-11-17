@@ -1,7 +1,7 @@
 # Overview
 This script to run 'SCV_SAV' analysis to idenify single codon and amino acid variants specific to a species which you are interested in. Based on this script and demo data, you can find human-specific codon and amino acid variants mutually exclusive to codona and amino acids of non-human primates.
 ## Input Files
-It needs multiple peptide sequence aglinments as input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format). 'orthologs_information' descriptions to generate multiple sequence alignments of the primate lineage.
+It needs multiple peptide sequence aglinments as input files (as [fasta](https://en.wikipedia.org/wiki/FASTA_format) format). 'orthologs_information' folder includes descriptions to generate multiple sequence alignments of the primate lineage.
 ## Variables in Script
   1. input path
   2. input file format
