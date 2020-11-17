@@ -1,12 +1,8 @@
 # Please set workding direcotry into "6.CorrelationPlots" in zipfile
 setwd("E:\\GoogleDrive\\Research\\2020\\Avian_vocal_learning_20201020\\Final_Draft\\GitHub\\VocalLearningBirds_2020\\Vocallearningbirds_2020\\6.CorrelationPlots\\")
 
-#install.packages("dplyr")
-library(dplyr)
-#install.packages("corrplot")
-library(corrplot)
-#install.packages("PerformanceAnalytics")
-library("PerformanceAnalytics")
+#install.packages("rlang")
+#install.packages("car")
 library(car)
 
 

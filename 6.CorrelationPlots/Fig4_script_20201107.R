@@ -3,18 +3,10 @@ setwd("E:\\GoogleDrive\\Research\\2020\\Avian_vocal_learning_20201020\\Final_Dra
 
 
 # Library
-#install.packages("ggplot2")
-library(ggplot2)
-#install.packages("corrplot")
-library(corrplot)
-#install.packages("GGally")
-library(GGally)
+#install.packages("rlang")
 #install.packages("car")
 library(car)
-#install.packages("gplots")
-library("gplots")
-#install.packages("pheatmap")
-library("pheatmap")
+
 
 # Fig4ab
 # input data
